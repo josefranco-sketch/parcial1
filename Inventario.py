@@ -169,7 +169,7 @@ def guardar_inventario(inventario): #recibe el data frame inventario
     )
     print("\nInventario guardado en inventario.csv\n")
 
-def mostrar_menu():
+def mostrar_menu(): #definimos la funcion mostrar menu
 
     print("========== SISTEMA DE INVENTARIO JF ===========")
 
@@ -185,4 +185,47 @@ def mostrar_menu():
 
     print("================================================")
 
-    
+def main(): #no recibe un parámetro porque esta función crea el inventario
+
+    inventario = crear_inventario_inicial()#esta funcion crea el diccionario, data frame, calcula total y regresa inventario
+    continuar = True #creacion de una variable booleana
+
+    while continuar:#minetras continuar sea true repite el menú
+        mostrar_menu()
+        opcion = input("Selecciona la opción que prefieras :")
+
+        if opcion == "1":
+            mostrar_inventario_(inventario)
+
+        elif opcion == "2":
+            inventario = agregar_producto(inventario)
+        
+        elif opcion == "3":
+            buscar_producto(inventario)
+
+        elif opcion == "4":
+            inventario = vender_producto(inventario)
+        
+        elif opcion == "5":
+            inventario = reabastecer_producto(inventario)
+        
+        elif opcion == "6":
+            mostrar_bajo_stock(inventario)
+        
+        elif opcion == "7":
+            mostrar_reporte_general(inventario)
+
+        elif opcion == "8":
+            guardar_inventario(inventario)
+        
+        elif opcion == "9":
+            guardar_inventario(inventario)
+            print("Gracias por usar este sistema")
+            continuar = False
+        
+        else:
+            print("Opción no válida.")
+
+main()
+
+            
