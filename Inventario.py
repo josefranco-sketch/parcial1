@@ -28,3 +28,31 @@ def mostrar_inventario_(inventario): #Crear la función mostrar inventario y asi
         print(inventario)
     
     print("\n=======================================\n") #estética
+
+def agregar_producto(inventario):
+    print("\n========== AGREGAR PRODUCTO ==========\n")
+    codigo = input("Ingrese el código del producto: ")
+    producto = input("Ingrese el nombre del producto: ")
+    categoría = input("Ingrese la categoría del producto: ")
+    cantidad = int(input("Ingrese la cantidad inicial: "))
+    precio = float(input("Ingrese el precio unitario: "))
+
+    if not inventario[inventario["codigo"] == codigo ].empty: #definir condición donde evalua si existe o no existe el codigo a ingresar
+        print("\nYa existe un producto con ese código") #El if not hace que se devuelva esto si el codigo que se ingresó ya existe
+        return inventario #Es necesario pues no deseamos agregar productos duplicados 
+    
+    nuevo_producto = pd.DataFrame([{ #Creamos nuevo producto con un data frame y generamos el diccionario {}, la lista [] y () que es llamar al dataframe
+        "codigo" : codigo,
+        "producto" : producto,
+        "categoría" : categoría,
+        "cantidad" : cantidad,
+        "precio" : precio
+    }])
+    
+    inventario = pd.concat( #Esto hace que unamos la tabla con el nuevo producto
+        [inventario, nuevo_producto], #importante el orden pues a la tabla original le agrega el nuevo producto
+        ignore_index=True #Hace que ignore los indíces anteriores y los reescribe
+    )
+    inventario = calcular_valor_total(inventario) #Calculara el valor total nuevo de la tabla con el producto agregado
+    print("\nProducto agregado correctamente\n")
+    return inventario   
