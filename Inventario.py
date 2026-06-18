@@ -160,6 +160,15 @@ def mostrar_reporte_general(inventario):#definimos la funcion para que nos de lo
 
     print("\n=============================================")
 
+def guardar_inventario(inventario): #recibe el data frame inventario
+
+    inventario = calcular_valor_total(inventario) #por seguridad guardamos 
+    inventario.to_csv(#convierte el data frame en un archivo CSV (comma separated values)
+        "inventario.csv",#nombre del achivo
+        index=False#para que no tome los indices como parte de los datos.
+    )
+    print("\nInventario guardado en inventario.csv\n")
+
 
 
     
