@@ -56,3 +56,16 @@ def agregar_producto(inventario):
     inventario = calcular_valor_total(inventario) #Calculara el valor total nuevo de la tabla con el producto agregado
     print("\nProducto agregado correctamente\n")
     return inventario   
+
+def buscar_producto(inventario): #Definir la función buscar producto
+    print("\n========== BUSCAR PRODUCTO ==========\n")
+    codigo = input("Ingrese el código del producto a buscar: ") #El usuario ingresa el codigo a buscar
+    resultado = inventario[inventario["codigo"] == codigo] #Crea una mascara booleana para filtrar y obtener las filas que coinciden
+
+    if resultado.empty: #Condición cuando no encuentra el código
+        print("\nno se encontró ningún producto con ese código\n")
+    else: #que pasa si si existe el código
+        print("\nProducto encontrado :\n")
+        print(resultado)
+    
+    print("\n====================================\n")
