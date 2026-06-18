@@ -113,4 +113,18 @@ def reabastecer_producto(inventario): #Definimos la función para reabastecer un
     print("\nProducto reabastecido correctamente\n")
     return inventario #otra vez devuelve el inventario actualizado
 
+def mostrar_bajo_stock(inventario): #definir la función para encontrar los productos con stock bajo
+
+    print("\n=========== PRODUCTOS CON BAJO STOCK ==========")
+    limite = int(input("Ingrese el límite mínimo de stock para el inventario :")) #Pedimos que nos den el número mínimo para el limite
+
+    productos_bajos = inventario[inventario["cantidad"] <= limite] #En la columna cantidad, si es menor o igual al numero lo detecta como true
+
+    if productos_bajos.empty: #definimos la condición si no encuentra productos con bajo stock
+        print("\nNo hay productos con bajo stock\n")
+    else:#definimos lo que pasaria si encuentra productos con bajo stock
+        print("\nProductos con bajo stock:\n")
+        print(productos_bajos)
+
+    print("\n=================================================")
 
