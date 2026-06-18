@@ -69,3 +69,27 @@ def buscar_producto(inventario): #Definir la función buscar producto
         print(resultado)
     
     print("\n====================================\n")
+
+def vender_producto(inventario):
+    print("\n========== VENDER PRODUCTO ==========")
+    codigo = input("Ingrese el código del producto vendido: ")
+    resultado = inventario[inventario["codigo"] == codigo]
+
+    if resultado.empty:
+        print("\nNo existe un producto con ese código.\n")
+        return inventario #Si no existe el producto terminamos esta función de una vez
+    
+    cantidad_vendida = int(input("Ingrese la cantidad vendida: "))
+    cantidad_actual = resultado["cantidad"].iloc[0]#uso de iloc para que de el valor en la primera fila de cantidad
+
+    if cantidad_vendida > cantidad_actual:
+        print("\nNo hay suficiente stock.\n")
+        return inventario
+    inventario.loc[ #usamos .loc para localizar filas, columnas y modificarlas
+        inventario["codigo"] == codigo, #Pide la fila del codigo a poner
+        "cantidad" #Pide la columna cantidad siguiendo el orden anterior
+    ] = cantidad_actual - cantidad_vendida
+    
+    inventario = calcular_valor_total(inventario) #Recalcula el valor del inventario
+    print("\nVenta registrada correctamente\n")
+    return inventario  #Nos devuelve la nueva versión del inventario 
