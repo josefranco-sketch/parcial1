@@ -19,3 +19,12 @@ def crear_inventario_inicial ():
     inventario = pd.DataFrame(datos) #Convierte los datos anteriores en una tabla
     inventario = calcular_valor_total(inventario) #Ahora si, calcula el valor total con la función previamente definída
     return inventario 
+
+def mostrar_inventario_(inventario): #Crear la función mostrar inventario y asignarle el parámetro inventario
+    print("\n========== INVENTARIO ACTUAL =========\n") #Estética del menú
+    if inventario.empty: #definir si el inventario esta vacío con .empty para devolver el siguiente print
+        print("El inventario está vacío")
+    else: #si no está vacío devuevle el inventario
+        print(inventario)
+    
+    print("\n=======================================\n") #estética
