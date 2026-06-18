@@ -93,3 +93,24 @@ def vender_producto(inventario):
     inventario = calcular_valor_total(inventario) #Recalcula el valor del inventario
     print("\nVenta registrada correctamente\n")
     return inventario  #Nos devuelve la nueva versión del inventario 
+
+def reabastecer_producto(inventario): #Definimos la función para reabastecer un producto
+    print("\n========= REABASTECER PRODUCTO ==========\n")
+
+    codigo = input("Ingrese el código del producto a reabastecer: ") #Solicitamos el codigo
+    resultado = inventario[inventario["codigo"] == codigo] #Busca la fila del codigo que pusieron
+
+    if resultado.empty: #Definimos que si busca el codigo y no lo encuentra devuelve el mensaje de abajo
+        print("\nNo existe un producto con ese código.\n")
+        return inventario #regresamos el inventaro 
+    
+    cantidad_agregada = int(input("Ingrese la cantidad que deseas agregar: ")) #solamente pedimos que nos digan cuantas unidades agregan.
+    cantidad_actual = resultado["cantidad"].iloc[0] #tomamos la columna cantida y con el .iloc pedimos el primer valor
+    inventario.loc[
+        inventario["codigo"] == codigo, "cantidad" #busca la fila del prodcuto que hayamos puesto el codigo
+    ] = cantidad_actual + cantidad_agregada #va a la columna cantidad y luego suma ambas cantidades
+    inventario = calcular_valor_total(inventario)#Recalcula el valor total con la funcion previamente echa
+    print("\nProducto reabastecido correctamente\n")
+    return inventario #otra vez devuelve el inventario actualizado
+
+
