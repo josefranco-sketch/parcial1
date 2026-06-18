@@ -169,6 +169,20 @@ def guardar_inventario(inventario): #recibe el data frame inventario
     )
     print("\nInventario guardado en inventario.csv\n")
 
+def mostrar_menu():
 
+    print("========== SISTEMA DE INVENTARIO JF ===========")
+
+    print("1. Ver inventario")
+    print("2. Agregar producto")
+    print("3. Buscar producto")
+    print("4. Vender producto")
+    print("5. Reabastecer producto")
+    print("6. Ver productos con bajo stock")
+    print("7. Ver reporte general")
+    print("8. Guardar inventario")
+    print("9. Salir")
+
+    print("================================================")
 
     
