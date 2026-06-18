@@ -128,3 +128,38 @@ def mostrar_bajo_stock(inventario): #definir la función para encontrar los prod
 
     print("\n=================================================")
 
+def mostrar_reporte_general(inventario):#definimos la funcion para que nos de los reportes generales
+    print("\n========= REPORTE GENERAL ==========")
+    inventario = calcular_valor_total(inventario) #Para estar tranquilos volvemos a calcular el valor total
+
+    total_productos = len(inventario) #len cuenta cuantas filas tiene la tabla
+    #(Cuantos productos distintos hay en el inventario)
+    total_unidades = inventario["cantidad"].sum()#sum suma la columna cantidad
+    valor_total_inventario = inventario["valor_total"].sum()#Suma el valor monetario del inventario
+    producto_mayor_valor = inventario.sort_values( #sort values ordena la tabla por una columna
+        by = "valor_total", #este es por lo cual quiero ordenar la columna
+        ascending = False #significa de mayor a menor (descender)
+    ).head(1) #toma solo la primera fila, la cual seria el mas valioso
+
+    producto_mayor_stock = inventario.sort_values(
+        by = "cantidad",
+        ascending = False
+    ).head(1) #Hace exactamente lo mismo solo que para el producto con mayor cantidad
+
+    valor_por_categoria = inventario.groupby("categoria")["valor_total"].sum()#agrupa por categoria de producto.
+    #Luego solo trabaja la columna de valor total y suma cada categoría por valor 
+
+    print("La cantidad de productos diferentes son :", total_productos)
+    print("Total de unidades en inventario :", total_unidades)
+    print("El valor total del inventario es de :Q", valor_total_inventario)
+
+    print("El producto con mayor valor en inventario es: ", producto_mayor_valor)
+    print("El producto con mayor stock disponible es: ", producto_mayor_stock)
+    print("El valor total por categoría es:")
+    print(valor_por_categoria)
+
+    print("\n=============================================")
+
+
+
+    
